@@ -12,9 +12,9 @@ Servo servo1;
 //Global variables
 long time_taken;  // stores the time taken for the wave to come back
 float dist_in_cm; // will store the value of distance in centimeters
-char *ssid = "";
-char *password = "";
-String cse_ip = ""; // YOUR IP from ipconfig/ifconfig
+char *ssid = "your ssid";
+char *password = "your password";
+String cse_ip = "your ip"; // YOUR IP from ipconfig/ifconfig
 String cse_port = "8080";
 String server = "http://" + cse_ip + ":" + cse_port + "/~/in-cse/in-name/";
 String ae = "Radar";

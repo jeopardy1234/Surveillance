@@ -9,7 +9,7 @@ cnt = "Distance"
 # uri_cnt = uri_ae + "/" + cnt
 
 
-# delete_ae("http://localhost:8080/~/in-cse/in-name/Water-Level-Sensor")
+# delete_ae("http://localhost:8080/~/in-cse/in-name/Radar")
 # create_ae(uri_cse, ae)
 for i in range(7):
     cnt = f"dist_{i*30}_deg"

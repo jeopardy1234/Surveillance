@@ -12,9 +12,9 @@ headers = {
     'Content-type': 'application/json'
 }
 
-uri_cnt = "http://127.0.0.1:8080/~/in-cse/in-name/ultrasonic_sensor_1/distance"
+uri_cnt = "http://localhost:8080/~/in-cse/in-name/Radar/dist_"
 # getting all content instances under cnt
-uri_cnt += '/?rcn=4'
+# uri_cnt += '/?rcn=4'
 
 
 # Define socket host and port
@@ -40,19 +40,22 @@ var = 0
 
 while True:
     # get values from onem2m
-    # get request to get all content instances
-    # response = requests.get(uri_cnt, headers=headers)
-    # ret_data = json.loads(response.text)
-
+    values = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    for i in range(7):
+        new_uri = uri_cnt + str(i*30) + "_deg/la"
+        response = requests.get(new_uri, headers=headers)
+        ret_data = json.loads(response.text)
+        values[i] = int(ret_data['m2m:cin']['con'])
+        # print(response.text)
+    
     # make radar graph
     var = var + 1
     df = pd.DataFrame(dict(
-        r=[var, 5, 2, 2, 3],
-        theta=['processing cost', 'mechanical properties', 'chemical stability',
-               'thermal stability', 'device integration']))
+        r=values,
+        theta=['0 degree', '30 degree', '60 degree', '90 degree', '120 degree', '150 degree', '180 degree', 'nil1', 'nil2', 'nil3', 'nil4', 'nil5']))
     fig = px.line_polar(df, r='r', theta='theta', line_close=True)
     fig.write_html("radar_plotter.html")
-    
+
     # read all content from radar_plotter.html
     with open("radar_plotter.html", "r") as f:
         string_html = f.read()
