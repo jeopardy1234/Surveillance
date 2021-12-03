@@ -90,20 +90,32 @@ Gaurav has the radar. It has a $180^\circ$ sweeping angle. It cycles through 7 a
 
 Gaurav first runs \texttt{src.py}, which sets up oneM2M by creating a container. On oneM2M, we have 7 graphs that plot distance measured versus time, one for each of the axes along which distance is measured.
 
-Then, he runs \texttt{radar/radar.ino} and \texttt{radar\_plotter.py} simultaneously. \ttfamily radar/\allowbreak radar.ino \normalfont is what runs the radar itself while \texttt{radar\_plotter.py} plots an interactive graph (a spider plot) in \texttt{localhost:8000}, one for each axis.
+Then, he runs \texttt{radar/radar.ino} and \texttt{radar\_plotter.py} simultaneously. \ttfamily radar/\allowbreak radar.ino \normalfont is what runs the radar itself while \texttt{radar\_plotter.py} plots an interactive graph (a spider plot) in \texttt{localhost:8000}, one for each axis (see \cref{fig:RP}).
 % Write what this graph measures
 % Insert figures of the oneM2M graphs and the radar_plotter.py graph
 
-
+\begin{figure}[!h]
+    \centering
+    \includegraphics[scale=0.15]{img/RadarPlotter Chart.png}
+    \caption{Interactive graph in the browser, plotter by \texttt{radar\_plotter.py}}
+    \label{fig:RP}
+\end{figure}
 
 \subsubsection*{Anusha's End}
-Anusha has the motion detection system. She has a PIR motion sensor along with a buzzer and an LED. Originally, the plan was to integrate both, the radar and the motion sensor into a single system, but that proved infeasible due to online classes. Anusha runs \texttt{telegram/\allowbreak telegram.ino}, which contains the code for Telegram bot and the end-user's interaction with Anusha's circuit. The bot can be given the following commands:
+Anusha has the motion detection system. She has a PIR motion sensor along with a buzzer and an LED. Originally, the plan was to integrate both, the radar and the motion sensor into a single system, but that proved infeasible due to online classes. A graph of the number of times motion is detected is plotted on ThingSpeak as a function of time (see \cref{fig:TS}). Anusha runs \texttt{telegram/\allowbreak telegram.ino}, which contains the code for Telegram bot and the end-user's interaction with Anusha's circuit. The bot can be given the following commands:
 \begin{enumerate}
     \item \texttt{/start} or \texttt{/help} for a list of commands that can be executed,
     \item \texttt{/led\_warn} to turn the LED on and \texttt{/led\_off} to turn the LED off,
     \item \texttt{/buzzer\_warn} to turn the buzzer on and \texttt{/buzzer\_off} to turn the buzzer off, and
     \item \texttt{/led\_state} and \texttt{/buzzer\_state} to learn about the status of the LED and the buzzer respectively (i.e. whether they are on or off).
 \end{enumerate}
+
+\begin{figure}[!t]
+    \centering
+    \includegraphics[scale=0.6]{img/ThingSpeak Chart.png}
+    \caption{Activity vs time plot on ThingSpeak}
+    \label{fig:TS}
+\end{figure}
 
 
 \end{document}
