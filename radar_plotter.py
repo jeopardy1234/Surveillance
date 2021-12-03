@@ -1,5 +1,4 @@
-# While this program is running, go to localhost:8080 to
-# see the output
+
 import socket
 import matplotlib.pyplot as plt
 
@@ -37,7 +36,6 @@ reload_string = """
 </script>
 """
 string_html = ''
-var = 0
 
 while True:
     # get values from onem2m
@@ -46,15 +44,17 @@ while True:
         new_uri = uri_cnt + str(i*30) + "_deg/la"
         response = requests.get(new_uri, headers=headers)
         ret_data = json.loads(response.text)
-        values[i] = int(ret_data['m2m:cin']['con'])
+        values[i-3] = int(ret_data['m2m:cin']['con'])
         # print(response.text)
-    
+
     # make radar graph
-    var = var + 1
     df = pd.DataFrame(dict(
         r=values,
-        theta=['0 degree', '30 degree', '60 degree', '90 degree', '120 degree', '150 degree', '180 degree', 'nil1', 'nil2', 'nil3', 'nil4', 'nil5']))
-    fig = px.line_polar(df, r='r', theta='theta', line_close=True)
+        theta=['90°', '120°', '150°', '180°', '210°', '240°', '270°', '300°', '330°', '0°', '30°', '60°', ]))
+    fig = px.line_polar(df, r='r', theta='theta',
+                        line_close=True,
+                        range_theta=[0, 180],
+                        direction="counterclockwise")
     fig.write_html("radar_plotter.html")
 
     # read all content from radar_plotter.html
