@@ -1,4 +1,5 @@
-
+# While this program is running, go to localhost:8080 to
+# see the output
 import socket
 import matplotlib.pyplot as plt
 

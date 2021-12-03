@@ -5,8 +5,6 @@ import json
 import time
 
 
-
-
 # ====================================================
 # Register an AE
 
@@ -160,7 +158,7 @@ def get_data(uri, format="json"):
     headers = {
         'X-M2M-Origin': 'admin:admin',
         'Content-type': 'application/json'}
-# works with /la only with containerInstances as m2m:cin is only in that 
+# works with /la only with containerInstances as m2m:cin is only in that
     response = requests.get(uri, headers=headers)
     # print('Return code : {}'.format(response.status_code))
     # print('Return Content : {}'.format(response.text))
