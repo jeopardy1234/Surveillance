@@ -66,7 +66,8 @@
 \newcommand{\textsb}{\textsubscript}
 
 \title{\uwave{Project Surveillance}\\Report}
-\author{Aditya Harikrish\\Anusha Nath Roy\\Gaurav Singh\\Yash Anil Bhatia}
+\author{Aditya Harikrish - 2020111009\\Anusha Nath Roy - 2020101124\\Gaurav Singh - 2020111014\\Yash Anil Bhatia - 2020101007
+}
 \date{}
 
 \begin{document}
@@ -78,19 +79,19 @@ Our initial objective was to create a security device that clicked several pictu
 \subsection*{Challenges and Consequent Change in Objectives}
 We were not able to upload any code to the ESP32-Cam module. We tried several options, but were unable to get it to work. Therefore, we changed our objective while retaining the same theme\textemdash security. We designed
 \begin{enumerate}
-    \item a radar, and
+    \item a radar with an ultrasonic distance sensor, and
     \item a motion detection warning system integrated into a Telegram (a popular messaging app) bot for the end user to interact with.
 \end{enumerate}
 
 \subsection*{Implementation}
-Our circuit is spread across two of our teammates\textemdash Gaurav and Anusha\textemdash due to the constraints of distance learning.
+Our circuit is spread across two nodes\textemdash Node 1 and Node 2\textemdash due to the constraints of distance learning.
 
-\subsubsection*{Gaurav's End}
-Gaurav has the radar. It has a $180^\circ$ sweeping angle. It cycles through 7 angles\textemdash $0^\circ$, $30^\circ$, $60^\circ$, $90^\circ$, $120^\circ$, $150^\circ$ and $180^\circ$\textemdash and records the distance measured by the distance sensor for each of these angles.
+\subsubsection*{Node 1's End}
+Node 1 has the radar. It has a $180^\circ$ sweeping angle. It cycles through 7 angles\textemdash $0^\circ$, $30^\circ$, $60^\circ$, $90^\circ$, $120^\circ$, $150^\circ$ and $180^\circ$\textemdash and records the distance measured by the distance sensor for each of these angles.
 
-Gaurav first runs \texttt{src.py}, which sets up oneM2M by creating a container. On oneM2M, we have 7 graphs that plot distance measured versus time, one for each of the axes along which distance is measured.
+Node 1 first runs \texttt{src.py}, which sets up oneM2M by creating a container. On oneM2M, we have the data for the 7 graphs that plot distance measured versus time, one for each of the axes along which distance is measured.
 
-Then, he runs \texttt{radar/radar.ino} and \texttt{radar\_plotter.py} simultaneously. \ttfamily radar/\allowbreak radar.ino \normalfont is what runs the radar itself while \texttt{radar\_plotter.py} plots an interactive graph (a spider plot) in \texttt{localhost:8000}, one for each axis (see \cref{fig:RP}).
+Then, it runs \texttt{radar/radar.ino} and \texttt{radar\_plotter.py} simultaneously. \ttfamily radar/\allowbreak radar.ino \normalfont is what runs the radar itself while \texttt{radar\_plotter.py} plots an interactive graph (a spider plot) in \texttt{localhost:8000} using the data stored in the oneM2M container, one for each axis (see \cref{fig:RP}).
 % Write what this graph measures
 % Insert figures of the oneM2M graphs and the radar_plotter.py graph
 
@@ -101,8 +102,8 @@ Then, he runs \texttt{radar/radar.ino} and \texttt{radar\_plotter.py} simultaneo
     \label{fig:RP}
 \end{figure}
 
-\subsubsection*{Anusha's End}
-Anusha has the motion detection system. She has a PIR motion sensor along with a buzzer and an LED. Originally, the plan was to integrate both, the radar and the motion sensor into a single system, but that proved infeasible due to online classes. A graph of the number of times motion is detected is plotted on ThingSpeak as a function of time (see \cref{fig:TS}). Anusha runs \texttt{telegram/\allowbreak telegram.ino}, which contains the code for Telegram bot and the end-user's interaction with Anusha's circuit. The bot can be given the following commands:
+\subsubsection*{Node 2's End}
+Node 2 has the motion detection system. It has a PIR motion sensor along with a buzzer and an LED. Originally, the plan was to integrate both, the radar and the motion sensor into a single system, but that proved infeasible due to online classes. A graph of the number of times motion is detected is plotted on ThingSpeak as a function of time (see \cref{fig:TS}). Node 2 runs \texttt{telegram/\allowbreak telegram.ino}, which contains the code for Telegram bot and the end-user's interaction with Node 2's circuit. The bot can be given the following commands:
 \begin{enumerate}
     \item \texttt{/start} or \texttt{/help} for a list of commands that can be executed,
     \item \texttt{/led\_warn} to turn the LED on and \texttt{/led\_off} to turn the LED off,
@@ -115,6 +116,13 @@ Anusha has the motion detection system. She has a PIR motion sensor along with a
     \includegraphics[scale=0.6]{img/ThingSpeak Chart.png}
     \caption{Activity vs time plot on ThingSpeak}
     \label{fig:TS}
+\end{figure}
+
+\begin{figure}[!h]
+    \centering
+    \includegraphics*[scale=0.5]{img/Telegram Bot.png}
+    \caption{The Telegram bot}
+    \label{fig:TB}
 \end{figure}
 
 
